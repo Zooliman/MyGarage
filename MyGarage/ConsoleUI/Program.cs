@@ -4,6 +4,7 @@ public class Program
     public static void Main()
     {
         bool isRunning = true;
+        Dictionary<object, string> userInputs = new Dictionary<object, string>();
 
         GarageManager garageManager = new GarageManager();
         DisplayWelcomeMessage();
@@ -11,12 +12,28 @@ public class Program
 
         while (isRunning)
         {
-            int userChoice = InputValidator.GetValidMenuChoice();
+            string userChoice = Console.ReadLine();
+            int userChoiceInt = int.Parse(userChoice); // This will throw an exception if the user input is not a number
 
-            if (userChoice == 1)
+            if (userChoiceInt == 1)
             {
                 // Ask for vehicle license plate
-                
+                string licensePlate = InputValidator.GetLicensePlate();
+                userInputs.Add("licensePlate", licensePlate);
+
+                // Check if the vehicle is already in the garage
+                if (garageManager.IsVehicleInGarage(licensePlate))
+                {
+                    System.Console.WriteLine("Vehicle is already in the garage!");
+                    System.Console.WriteLine("Vehicle status changed to 'InFix'");
+                }
+                else
+                {
+                    // Ask for vehicle type to insert, then ask for vehicle status (Gas amount / Battery time left, Wheel's air pressure, Color & Number of doors (if car), License type (if motorcycle), Cargo volume (if truck), etc.)
+
+                    // Insert the vehicle to the garage
+                    // Dictionary<object, string> newVehicleDetails = InputValidator.GetVehicleDetails();
+                }
             }
             else
             {
@@ -28,6 +45,8 @@ public class Program
         System.Console.WriteLine("Goodbye!");
 
     }
+
+    // Check
 
     private static void DisplayWelcomeMessage()
     {
