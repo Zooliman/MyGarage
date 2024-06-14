@@ -1,40 +1,78 @@
-using System.Text;
-
 public class GarageManager
-{
-    private List<Vehicle> m_VehiclesInGarage;
-
-    public GarageManager()
     {
-        m_VehiclesInGarage = new List<Vehicle>();
-    }
-
-    public void InsertVehicle(Vehicle i_VehicleToInsert)
-    {
-        try
+        
+        private Dictionary<string,Vehicle> m_VehiclesInGarage = new Dictionary<string, Vehicle>();
+        public Dictionary<string, Vehicle> VehicelsInGarage
         {
-            m_VehiclesInGarage.Add(i_VehicleToInsert);
+            get { return m_VehiclesInGarage; }
+            set { m_VehiclesInGarage = value; }
         }
-        catch (Exception e)
+
+        public void addVehicleToGarage()
         {
-            System.Console.WriteLine(e.Message);
+            GasCar car = new GasCar();
+            car.LicenseID = "175399";
+            m_VehiclesInGarage.Add(car.LicenseID, car);
+      
         }
-        m_VehiclesInGarage.Add(i_VehicleToInsert);
-    }
 
-    public bool IsVehicleInGarage(string licensePlate)
-    {
-        bool isVehicleInGarage = false;
-
-        foreach (Vehicle vehicle in m_VehiclesInGarage)
+/*
+        public static void Main()
         {
-            if (vehicle.Equals(licensePlate))
+            *//*GasCar hyundai = new GasCar("i-10", "17422111", "Shai Ben Hemo", "0500000000", Vehicle.eVehicleStatus.InFix, Car.eCarColor.White, Car.eNumOfDoors.Four);
+            Truck tetra = new Truck("scania", "1112222", "Bar Azulay", "0540000000", Vehicle.eVehicleStatus.Paid, true, 100f);
+            hyundai.ModelName = "i-20";
+
+            ElectricMotorcycle suzuki = new ElectricMotorcycle("R750", "1132222", "Ben", "000000000", Vehicle.eVehicleStatus.Fixed, Motorcycle.eLicenseType.AA, 750);
+            Console.WriteLine(suzuki.Equals(tetra));*//*
+            //print all the details about the car
+
+            GasCar toyota = new GasCar();
+            toyota.ModelName = "corolla";
+            toyota.CarColor = Car.eCarColor.White;
+            toyota.EnergyLeftPercents = 30;
+            toyota.Owner = "Shai";
+            toyota.LicenseID = "175399";
+
+        }
+*/
+        public bool IsVehicleInGarage(string i_LicenseID)
+        {
+            bool isVehicleInGarage = false;
+
+            foreach (Vehicle vehicle in m_VehiclesInGarage.Values)
             {
-                isVehicleInGarage = true;
-                vehicle.VehicleStatus = Vehicle.eVehicleStatus.InFix;
-                break;
+                if (vehicle.Equals(i_LicenseID))
+                { 
+                    isVehicleInGarage = true;
+                }
             }
+
+            return isVehicleInGarage;
         }
-        return isVehicleInGarage;
+
+    public enum eVehicleTypes
+    {
+        GasCar,
+        ElectricCar,
+        GasMotorcycle,
+        ElectricMotorcycle,
+        Truck
     }
+
+    public enum eVehicleStatus
+    {
+        InFix,
+        Fixed,
+        Paid
+    }
+
+    public enum eVehicleColors
+    {
+        Yellow,
+        White,
+        Red,
+        Black
+    }
+
 }

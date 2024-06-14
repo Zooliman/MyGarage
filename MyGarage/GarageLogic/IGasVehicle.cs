@@ -1,4 +1,3 @@
-
 public interface IGasVehicle
 {
     eGasType GasType
@@ -18,12 +17,4 @@ public interface IGasVehicle
 
     void Fuel(float i_GasAmountToAdd, eGasType i_GasType);
     
-}
-
-public enum eGasType
-{
-    Soler,
-    Octan95,
-    Octan96,
-    Octan98
 }

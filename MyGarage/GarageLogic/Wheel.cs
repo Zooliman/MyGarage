@@ -24,7 +24,7 @@ public class Wheel
     public float MaxAirPressure
     {
         get { return m_MaxAirPressure; }
-        set { m_MaxAirPressure = value;}
+        set { m_MaxAirPressure = value;} // not sure if we need
     }
     public void Inflate(float i_AmountOfAirPressureToAdd)
     {

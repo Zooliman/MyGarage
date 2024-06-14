@@ -1,31 +1,23 @@
 class GasMotorcycle : Motorcycle, IGasVehicle
+{
+    public eGasType GasType
     {
-        private string m_ModelName;
-        private string m_LicenseID;
-        private float m_EnergyLeft;
-        private List<Wheel> m_Wheels;
+        get { return eGasType.Octan98; }
+    }
 
-        private eLicenseType m_licenseType;
-        private int m_EngineVolume;
+    public float GetCurrentGasAmount
+    {
+        get { return EnergyLeftPercents; }
+    }
 
-        public eGasType GasType
-        {
-            get { return eGasType.Octan98; }
-        }
+    public float GetMaxGasAmount
+    {
+        get { return 5.5f; }
+    }
 
-        public float GetCurrentGasAmount
-        {
-            get { return m_EnergyLeft; }
-        }
-
-        public float GetMaxGasAmount
-        {
-            get { return 5.5f; }
-        }
-
-        void IGasVehicle.Fuel(float i_GasAmountToAdd, eGasType i_GasType)
-        {
-
-        }
+    void IGasVehicle.Fuel(float i_GasAmountToAdd, eGasType i_GasType)
+    {
 
     }
+
+}

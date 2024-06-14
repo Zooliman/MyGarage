@@ -3,16 +3,11 @@ public abstract class Vehicle
     private string m_ModelName;
     private string m_LicenseID;
     private float m_EnergyLeft;
-    private Wheel [] m_Wheels;
+    private Wheel[] m_Wheels;
+
     private string m_Owner;
     private string m_OwnerPhoneNumber;
-    private eVehicleStatus m_VehicleStatus;
-
-    // public Vehicle(string i_ModelName, string i_LicenseID, string i_Owner, string i_OwnerPhoneNumber, eVehicleStatus i_VehicleStatus)
-    public Vehicle()
-    {
-        
-    }
+    private GarageManager.eVehicleStatus m_VehicleStatus;
 
     public string ModelName
     {
@@ -26,7 +21,7 @@ public abstract class Vehicle
         set { m_LicenseID = value; }
     }
 
-    public float EnergyLeft
+    public float EnergyLeftPercents
     {
         get { return m_EnergyLeft; }
         set { m_EnergyLeft = value; }
@@ -37,19 +32,22 @@ public abstract class Vehicle
         get { return m_Wheels; }
         set { m_Wheels = value; }
     }
-    
-    public eVehicleStatus VehicleStatus
+
+    public string Owner
+    {
+        get { return m_Owner; }
+        set { m_Owner = value; }
+    }
+    public string OwnerPhoneNumber
+    {
+        get { return m_OwnerPhoneNumber; }
+        set { m_OwnerPhoneNumber = value; }
+    }
+
+    public GarageManager.eVehicleStatus VehicleStatus
     {
         get { return m_VehicleStatus; }
         set { m_VehicleStatus = value; }
-    }
-
-
-    public enum eVehicleStatus
-    {
-        InFix,
-        Fixed,
-        Paid
     }
 
     public override bool Equals(object obj)
@@ -59,11 +57,11 @@ public abstract class Vehicle
         {
             isEqual = m_LicenseID.Equals(((Vehicle)obj).LicenseID);
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
             isEqual = false;
         }
         return isEqual;
-        
+
     }
 }

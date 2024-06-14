@@ -1,16 +1,13 @@
 class ElectricMotorcycle : Motorcycle, IElectricVehicle
 {
-    private string m_ModelName;
-    private string m_LicenseID;
-    private float m_EnergyLeft;
-    private List<Wheel> m_Wheels;
+    public ElectricMotorcycle()
+    {
 
-    private eLicenseType m_licenseType;
-    private int m_EngineVolume;
+    }
 
     public float GetRemainingBatteryHours
     {
-        get { return m_EnergyLeft; }
+        get { return EnergyLeftPercents; }
     }
 
     public float GetMaxBatteryTime

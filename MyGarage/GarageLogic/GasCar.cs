@@ -1,6 +1,6 @@
 class GasCar : Car, IGasVehicle
 {
-     // Max hours
+    
     public eGasType GasType
     {
         get { return eGasType.Octan95; }
@@ -8,7 +8,7 @@ class GasCar : Car, IGasVehicle
 
     public float GetCurrentGasAmount
     {
-        get { return EnergyLeft; }
+        get { return EnergyLeftPercents; }
     }
 
     public float GetMaxGasAmount
@@ -20,6 +20,12 @@ class GasCar : Car, IGasVehicle
     {
 
     }
+}
 
-
+public enum eGasType
+{
+    Soler,
+    Octan95,
+    Octan96,
+    Octan98
 }

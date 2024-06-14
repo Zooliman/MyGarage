@@ -1,25 +1,17 @@
 class ElectricCar : Car, IElectricVehicle
-{
-    private string m_ModelName;
-    private string m_LicenseID;
-    private float m_EnergyLeft;
-    private List<Wheel> m_Wheels;
-
-    private eCarColor m_Color;
-    private eNumOfDoors m_NumOfDoors;
-
-    public float GetRemainingBatteryHours
     {
-        get { return m_EnergyLeft; }
-    }
+        public float GetRemainingBatteryHours
+        {
+            get { return EnergyLeftPercents; }
+        }
 
-    public float GetMaxBatteryTime
-    {
-        get { return 3.5f; }
-    }
+        public float GetMaxBatteryTime
+        {
+            get { return 3.5f; }
+        }
 
-    void IElectricVehicle.ChargeBattery(float i_AmountOfHoursToCharge)
-    {
+        void IElectricVehicle.ChargeBattery(float i_AmountOfHoursToCharge)
+        {
 
+        }
     }
-}
