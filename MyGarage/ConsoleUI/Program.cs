@@ -98,10 +98,13 @@ public class Program
 
             try
             {
-                ValidateVehicleDetails(vehicleDetails);
-                
+                Dictionary<string, object> validatedVehicleDetails = InputValidator.ValidateAndGetVehicleDetails(vehicleDetails); 
             }
-            catch (Exception ex)
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message + "Please enter a number!");
+            }
+            catch (ValueOutOfRangeException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -109,40 +112,15 @@ public class Program
         }
     }
 
-private static void ValidateVehicleDetails(Dictionary<string, object> i_VehicleDetails)
-{
-    foreach (KeyValuePair<string, object> detail in i_VehicleDetails)
-    {
-        switch (detail.Key)
-        {
-            case "VehicleType":
-                // Need to convert it to a GarageManager.eVehicleTypes
-                break;
-            case "OwnerName":
-                // Need to check if it's a valid name
-                break;
-            case "OwnerPhoneNumber":
-                // Need to check if it's a valid phone number
-                break;
-            case "CurrentEnergy":
-                // Need to check if it's a valid energy value
-                break;
-
-            default:
-                break;
-        }
-    }
-}
-
-private static void printVehicleDetails(Dictionary<string, string> vehicleDetails)
-{
-    Console.Clear();
-    Console.WriteLine("Vehicle details:");
-    foreach (KeyValuePair<string, string> detail in vehicleDetails)
-    {
-        Console.WriteLine(detail.Key + ": " + detail.Value);
-    }
-}
+// private static void printVehicleDetails(Dictionary<string, string> vehicleDetails)
+// {
+//     Console.Clear();
+//     Console.WriteLine("Vehicle details:");
+//     foreach (KeyValuePair<string, string> detail in vehicleDetails)
+//     {
+//         Console.WriteLine(detail.Key + ": " + detail.Value);
+//     }
+// }
 
 public static void DisplayMainMenu()
         {

@@ -1,5 +1,6 @@
 
 
+
 class InputValidator
 {
     // private const int MENU_CHOICES = 8;
@@ -62,5 +63,81 @@ class InputValidator
         Console.Clear();
         System.Console.WriteLine("Is the vehicle carrying dangerous materials? (Y/N): ");
         return Console.ReadLine();
+    }
+
+    internal static Dictionary<string, object> ValidateAndGetVehicleDetails(Dictionary<string, object> vehicleDetails)
+    {
+        Dictionary<string, object> validatedVehicleDetails = new Dictionary<string, object>();
+
+        foreach (KeyValuePair<string, object> detail in vehicleDetails)
+        {
+            switch (detail.Key)
+            {
+                case "VehicleType":
+                    GarageManager.eVehicleType vehicleType = GetVehicleType(detail.Value);
+                    validatedVehicleDetails.Add("VehicleType", vehicleType);
+                    break;
+        
+                case "OwnerName":
+                    string ownerName = (string) detail.Value;
+                    if (ownerName.Length > 0)
+                    {
+                        validatedVehicleDetails.Add("OwnerName", ownerName);
+                    }
+                    else
+                    {
+                        throw new FormatException("Owner name cannot be empty!");
+                    }
+                    break;
+
+                case "OwnerPhoneNumber":
+                    int.Parse((string) detail.Value);
+                    validatedVehicleDetails.Add("OwnerPhoneNumber", detail.Value);
+                    break;
+
+                case "CurrentEnergy":
+                    float.Parse((string) detail.Value);
+                    validatedVehicleDetails.Add("CurrentEnergy", detail.Value); // NEED TO BE VALIDATED (!!!)
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+
+        return validatedVehicleDetails;
+    }
+
+    private static GarageManager.eVehicleType GetVehicleType(object i_TypeAsString)
+    {
+        int vehicleTypeAsInt = (int) i_TypeAsString;
+        GarageManager.eVehicleType vehicleType;
+
+        if (vehicleTypeAsInt == 1)
+        {
+            vehicleType = GarageManager.eVehicleType.GasCar;
+        }
+        else if (vehicleTypeAsInt == 2)
+        {
+            vehicleType = GarageManager.eVehicleType.ElectricCar;
+        }
+        else if (vehicleTypeAsInt == 3)
+        {
+            vehicleType = GarageManager.eVehicleType.GasMotorcycle;
+        }
+        else if (vehicleTypeAsInt == 4)
+        {
+            vehicleType = GarageManager.eVehicleType.ElectricMotorcycle;
+        }
+        else if (vehicleTypeAsInt == 5)
+        {
+            vehicleType = GarageManager.eVehicleType.Truck;
+        }
+        else
+        {
+            throw new ValueOutOfRangeException(1, 5);
+        }
+
+        return vehicleType;
     }
 }

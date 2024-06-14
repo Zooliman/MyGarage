@@ -51,7 +51,7 @@ public class GarageManager
             return isVehicleInGarage;
         }
 
-    public enum eVehicleTypes
+    public enum eVehicleType
     {
         GasCar,
         ElectricCar,

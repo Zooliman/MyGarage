@@ -5,6 +5,7 @@ abstract class Motorcycle : Vehicle
 
     public Motorcycle()
     {
+        base.
         Wheels = new Wheel[2];
         for (int i = 0; i < Wheels.Length; i++)
         {
