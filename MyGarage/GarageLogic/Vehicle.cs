@@ -2,12 +2,17 @@ public abstract class Vehicle
 {
     private string m_ModelName;
     private string m_LicenseID;
-    private float m_EnergyLeft;
+    private float m_EnergyLeftPercentage;
     private Wheel[] m_Wheels;
 
     private string m_Owner;
     private string m_OwnerPhoneNumber;
     private GarageManager.eVehicleStatus m_VehicleStatus;
+
+    public Vehicle()
+    {
+    
+    }
 
     public string ModelName
     {
@@ -21,10 +26,10 @@ public abstract class Vehicle
         set { m_LicenseID = value; }
     }
 
-    public float EnergyLeftPercents
+    public float EnergyLeftPrecentage
     {
-        get { return m_EnergyLeft; }
-        set { m_EnergyLeft = value; }
+        get { return m_EnergyLeftPercentage; }
+        set { m_EnergyLeftPercentage = value; }
     }
 
     public Wheel[] Wheels
@@ -57,11 +62,19 @@ public abstract class Vehicle
         {
             isEqual = m_LicenseID.Equals(((Vehicle)obj).LicenseID);
         }
-        catch (Exception ex)
+        catch
         {
             isEqual = false;
         }
         return isEqual;
 
+    }
+
+    public enum eLicenseType
+    {
+        A,
+        A1,
+        AA,
+        B1
     }
 }

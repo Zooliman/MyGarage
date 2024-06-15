@@ -1,35 +1,36 @@
-abstract class Motorcycle : Vehicle
-{
-    private eLicenseType m_LicenseType;
-    private int m_EngineVolume;
+// abstract class Motorcycle : Vehicle
+// {
+//     private eLicenseType m_LicenseType;
+//     private int m_EngineVolume;
 
-    public Motorcycle()
-    {
-        base.
-        Wheels = new Wheel[2];
-        for (int i = 0; i < Wheels.Length; i++)
-        {
-            Wheels[i] = new Wheel(string.Format("Michellin {0}", i), 33f, 33f);
-        }
-    }
+//     public Motorcycle()
+//     {
+//         Wheels = new Wheel[2];
+        
 
-    public eLicenseType LicenseType
-    {
-        get { return m_LicenseType; }
-        set { m_LicenseType = value; }
-    }
+//         for (int i = 0; i < Wheels.Length; i++)
+//         {
+//             Wheels[i] = new Wheel(string.Format("Michellin{0}", i), 33f, 33f);
+//         }
+//     }
 
-    public int EngineVolume
-    {
-        get { return m_EngineVolume; }
-        set { m_EngineVolume = value; }
-    }
+//     public eLicenseType LicenseType
+//     {
+//         get { return m_LicenseType; }
+//         set { m_LicenseType = value; }
+//     }
 
-    public enum eLicenseType
-    {
-        A,
-        A1,
-        AA,
-        B1
-    }
-}
+//     public int EngineVolume
+//     {
+//         get { return m_EngineVolume; }
+//         set { m_EngineVolume = value; }
+//     }
+
+//     public enum eLicenseType
+//     {
+//         A,
+//         A1,
+//         AA,
+//         B1
+//     }
+// }

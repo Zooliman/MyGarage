@@ -56,14 +56,12 @@ public class Program
             string vehicleType = InputValidator.getUserSelectionFromMenu(1, 5).ToString();
             vehicleDetails.Add("VehicleType", vehicleType);
 
-            // Ask for owner name and phone number
             string ownerName = InputValidator.GetDetailsAboutVehicle("Owner Name");
             vehicleDetails.Add("OwnerName", ownerName);
 
             string ownerPhoneNumber = InputValidator.GetDetailsAboutVehicle("Owner Phone Number");
             vehicleDetails.Add("OwnerPhoneNumber", ownerPhoneNumber);
 
-            // Ask for vehicle details
             string vehicleCurrentEnergy = InputValidator.GetDetailsAboutVehicle("Energy");
             vehicleDetails.Add("CurrentEnergy", vehicleCurrentEnergy);
 

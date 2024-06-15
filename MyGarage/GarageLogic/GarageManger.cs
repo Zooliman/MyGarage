@@ -8,13 +8,13 @@ public class GarageManager
             set { m_VehiclesInGarage = value; }
         }
 
-        public void addVehicleToGarage()
-        {
-            GasCar car = new GasCar();
-            car.LicenseID = "175399";
-            m_VehiclesInGarage.Add(car.LicenseID, car);
+        // public void addVehicleToGarage()
+        // {
+        //     GasCar car = new GasCar();
+        //     car.LicenseID = "175399";
+        //     m_VehiclesInGarage.Add(car.LicenseID, car);
       
-        }
+        // }
 
 /*
         public static void Main()
