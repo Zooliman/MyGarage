@@ -7,11 +7,34 @@ public abstract class Vehicle
 
     private string m_Owner;
     private string m_OwnerPhoneNumber;
-    private GarageManager.eVehicleStatus m_VehicleStatus;
+    private eVehicleStatus m_VehicleStatus;
 
     public Vehicle()
     {
-    
+        int numberOfWheels = 0;
+        float maxAirPressure = 0;
+
+        if (this is GasMotorcycle || this is ElectricMotorcycle)
+        {
+            numberOfWheels = 2;
+            maxAirPressure = 33;
+        }
+        else if (this is GasCar || this is ElectricCar)
+        {
+            numberOfWheels = 5;
+            maxAirPressure = 31;
+        }
+        else if (this is Truck)
+        {
+            numberOfWheels = 12;
+            maxAirPressure = 28;
+        }
+
+        m_Wheels = new Wheel[numberOfWheels];
+        for (int i = 0; i < m_Wheels.Length; i++)
+        {
+            m_Wheels[i] = new Wheel(maxAirPressure);
+        }
     }
 
     public string ModelName
@@ -49,26 +72,26 @@ public abstract class Vehicle
         set { m_OwnerPhoneNumber = value; }
     }
 
-    public GarageManager.eVehicleStatus VehicleStatus
+    public eVehicleStatus VehicleStatus
     {
         get { return m_VehicleStatus; }
         set { m_VehicleStatus = value; }
     }
 
-    public override bool Equals(object obj)
-    {
-        bool isEqual = false;
-        try
-        {
-            isEqual = m_LicenseID.Equals(((Vehicle)obj).LicenseID);
-        }
-        catch
-        {
-            isEqual = false;
-        }
-        return isEqual;
+    // public override bool Equals(object obj)
+    // {
+    //     bool isEqual = false;
+    //     try
+    //     {
+    //         isEqual = ((Vehicle)obj).LicenseID.Equals(this.LicenseID);
+    //     }
+    //     catch
+    //     {
+    //         isEqual = false;
+    //     }
+    //     return isEqual;
 
-    }
+    // }
 
     public enum eLicenseType
     {
@@ -77,4 +100,19 @@ public abstract class Vehicle
         AA,
         B1
     }
+
+    public enum eVehicleStatus
+    {
+        InFix,
+        Fixed,
+        Paid
+    }
+
+    public enum eCarColors
+    {
+        Yellow,
+        White,
+        Red,
+        Black
+    }    
 }

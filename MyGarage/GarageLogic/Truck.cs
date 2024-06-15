@@ -3,6 +3,11 @@ public class Truck : GasVehicle
     private bool m_HasDangerousMaterials;
     private float m_CargoVolume;
 
+    public Truck()
+    {
+        MaxGasAmount = 120f;
+        GasType = eGasType.Soler;
+    }
     public bool HasDangerousMaterials
     {
         get { return m_HasDangerousMaterials; }

@@ -1,3 +1,4 @@
+
 public class GarageManager
     {
         
@@ -8,13 +9,13 @@ public class GarageManager
             set { m_VehiclesInGarage = value; }
         }
 
-        // public void addVehicleToGarage()
-        // {
-        //     GasCar car = new GasCar();
-        //     car.LicenseID = "175399";
-        //     m_VehiclesInGarage.Add(car.LicenseID, car);
+        public void addVehicleToGarage()
+        {
+            GasCar car = new GasCar();
+            car.LicenseID = "175399";
+            m_VehiclesInGarage.Add(car.LicenseID, car);
       
-        // }
+        }
 
 /*
         public static void Main()
@@ -42,7 +43,7 @@ public class GarageManager
 
             foreach (Vehicle vehicle in m_VehiclesInGarage.Values)
             {
-                if (vehicle.Equals(i_LicenseID))
+                if (vehicle.LicenseID.Equals(i_LicenseID))
                 { 
                     isVehicleInGarage = true;
                 }
@@ -58,21 +59,6 @@ public class GarageManager
         GasMotorcycle,
         ElectricMotorcycle,
         Truck
-    }
-
-    public enum eVehicleStatus
-    {
-        InFix,
-        Fixed,
-        Paid
-    }
-
-    public enum eVehicleColors
-    {
-        Yellow,
-        White,
-        Red,
-        Black
     }
 
 }

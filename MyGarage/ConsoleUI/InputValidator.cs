@@ -5,7 +5,7 @@ class InputValidator
 {
     // private const int MENU_CHOICES = 8;
 
-    internal static int getUserSelectionFromMenu(int i_MinValue, int i_MaxValue)
+    public static int getUserSelectionFromMenu(int i_MinValue, int i_MaxValue)
     {
         bool isValidType = false;
         int userSelection = 0;
@@ -26,11 +26,6 @@ class InputValidator
             {
                 System.Console.WriteLine(ex.Message);
             }
-            finally
-            {
-                isValidType = true;
-            }
-            
         }
 
     return userSelection;
@@ -39,7 +34,7 @@ class InputValidator
     private static bool checkForValidInput(int i_UserSelection, int i_MinValue, int i_MaxValue)
     {
         bool isValidType = false;
-        if (i_UserSelection > i_MinValue && i_UserSelection < i_MaxValue)
+        if (i_UserSelection >= i_MinValue && i_UserSelection <= i_MaxValue)
         {
             isValidType = true;
         }
@@ -53,7 +48,7 @@ class InputValidator
 
     public static string GetDetailsAboutVehicle(string i_DetailsType)
     {
-        Console.Clear();
+        // Console.Clear();
         System.Console.WriteLine("Please enter the vehicle's " + i_DetailsType + ": ");
         return Console.ReadLine();
     }
@@ -140,4 +135,27 @@ class InputValidator
 
         return vehicleType;
     }
+
+
+    public static string GetExistingVehicleLicensePlate()
+    {
+        bool isExists = false;
+        string licensePlateNumber = "";
+        while (!isExists)
+        {
+            try
+            {
+                licensePlateNumber = GetDetailsAboutVehicle("License Plate");
+                isExists = Program.isVehicleInGarage(licensePlateNumber);
+            }
+
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+        }
+        return licensePlateNumber;
+    }
+
 }

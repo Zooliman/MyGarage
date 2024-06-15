@@ -7,17 +7,30 @@ public class Program
     public static void Main()
     {
 
-        // s_GarageManager.addVehicleToGarage();
+        s_GarageManager.addVehicleToGarage();
+
         DisplayMainMenu();
         try
         {
             int userChoiceFromMenu = InputValidator.getUserSelectionFromMenu(1, 8);
         
-            // int userFuncionalityChoice = InputValidator.getUserSelectionFromMenu(1);
-            // if (userFuncionalityChoice == 1)
-            // {
-            //     InsertNewVehicle();
-            // }
+            switch (userChoiceFromMenu)
+            {
+                case 1:
+                    InsertNewVehicle();
+                    break;
+                case 2:
+                    DisplayFilterOptions();
+                    DisplayCurrentLicensePlates();
+                    break;
+                case 3:
+                    ChangeVehicleState();
+                    break;
+                
+                default:
+                    break;
+            }
+
             
         }
         catch (FormatException ex)
@@ -46,7 +59,7 @@ public class Program
         {
             Console.WriteLine("Vehicle is already in the garage!");
             Console.WriteLine("Vehicle status changed to 'InFix'");
-            s_GarageManager.VehicelsInGarage[licensePlate].VehicleStatus = GarageManager.eVehicleStatus.InFix;
+            s_GarageManager.VehicelsInGarage[licensePlate].VehicleStatus = Vehicle.eVehicleStatus.InFix;
         }
         else
         {
@@ -156,10 +169,116 @@ public static void DisplayVehicleOptions()
 
 }
 
-        private static void AskForVehicleStatus()
+        public static bool isVehicleInGarage(string i_LicensePlate)
+        {
+            bool isVehicleInGarage = false;
+            if (s_GarageManager.IsVehicleInGarage(i_LicensePlate))
+            {
+                isVehicleInGarage = true;
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Vehicle with license plate {0} is not in the garage!", i_LicensePlate));
+            }
+            return isVehicleInGarage;
+        }
+
+        private static void DisplayCurrentLicensePlates()
+        {
+            Vehicle.eVehicleStatus status = Vehicle.eVehicleStatus.InFix;
+            List<string> licenseIDS = new List<string>();
+
+            int filterOption = InputValidator.getUserSelectionFromMenu(1, 4);
+
+            if (filterOption == 1) //display all the vehicles in the garage
+            {
+                licenseIDS = s_GarageManager.VehicelsInGarage.Keys.ToList();
+            }
+            else
+            {
+                if (filterOption == 2) //infix
+                {
+                    status = Vehicle.eVehicleStatus.InFix;
+                }
+
+                else if (filterOption == 3) //fixed
+                {
+                    status = Vehicle.eVehicleStatus.Fixed;
+                }
+                else //paid
+                {
+                    status = Vehicle.eVehicleStatus.Paid;
+                }
+
+                List<Vehicle> v = s_GarageManager.VehicelsInGarage.Values.Where(vehicle => vehicle.VehicleStatus == status).ToList();
+                foreach (Vehicle vehicle in v)
+                {
+                    licenseIDS.Add(vehicle.LicenseID);
+                }
+
+            }
+
+            if (licenseIDS.Count == 0)
+            {
+                Console.WriteLine("There are no {0} vehicles in the garage right now.", status);
+            }
+            else
+            {
+                int carNumber = 1;
+                foreach (string licenseID in licenseIDS)
+                {
+                    Console.WriteLine("{0}. {1}", carNumber++, licenseID);
+                }
+            }
+        }
+
+
+        private static void ChangeVehicleState()
+        {
+            Vehicle.eVehicleStatus status = Vehicle.eVehicleStatus.InFix;
+        
+            string licensePlate = InputValidator.GetExistingVehicleLicensePlate();
+            DisplayVehicleStates();
+            int vehicleState = InputValidator.getUserSelectionFromMenu(1, 3);
+
+            switch (vehicleState)
+            {
+                case 1:
+                    status = Vehicle.eVehicleStatus.InFix;
+                    break;
+
+                case 2:
+                    status = Vehicle.eVehicleStatus.Fixed;
+                    break;
+
+                case 3:
+                    status = Vehicle.eVehicleStatus.Paid;
+                    break;
+            }
+
+            s_GarageManager.VehicelsInGarage[licensePlate].VehicleStatus = status;
+        }
+
+        private static void DisplayFilterOptions()
         {
             Console.Clear();
-            Console.WriteLine("");
+            Console.WriteLine(
+@"Choose which license plates do you want to see:
+(1) - All vehicles
+(2) - InFix vehicles 
+(3) - Fixed vehicles
+(4) - Paid vehicles
+");
+        }
+        public static void DisplayVehicleStates()
+        {
+            Console.Clear();
+            Console.WriteLine(
+@"Enter the new vehicle's state:  
+(1) - InFix 
+(2) - Fixed 
+(3) - Paid
+");
         }
 
 }
